@@ -11,7 +11,7 @@
   "exports": {
     "./scripts/lint": "./scripts/lint.ts",
     "./scripts/test_changed": "./scripts/test_changed.js",
-    "./eslint": "./eslint.config.mjs",
+    "./eslint.config": "./eslint.config.mjs",
     "./eslint/*": "./eslint/*"
   },
   "files": [
