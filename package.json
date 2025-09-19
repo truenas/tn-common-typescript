@@ -1,0 +1,55 @@
+{
+  "name": "@truenas/common-typescript",
+  "version": "1.0.0",
+  "description": "Shared TypeScript utilities, scripts and ESLint configurations for TrueNAS projects",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "lint": "node scripts/lint.ts",
+    "test:changed": "node scripts/test_changed.js"
+  },
+  "exports": {
+    "./scripts/lint": "./scripts/lint.ts",
+    "./scripts/test_changed": "./scripts/test_changed.js",
+    "./eslint": "./eslint.config.mjs",
+    "./eslint/*": "./eslint/*"
+  },
+  "files": [
+    "scripts",
+    "eslint",
+    "eslint.config.mjs"
+  ],
+  "keywords": [
+    "truenas",
+    "typescript",
+    "eslint",
+    "lint",
+    "testing"
+  ],
+  "author": "TrueNAS",
+  "license": "MIT",
+  "dependencies": {
+    "@eslint/compat": "~1.2.1",
+    "@eslint/js": "~9.13.0",
+    "@smarttools/eslint-plugin-rxjs": "~1.0.22",
+    "@stylistic/eslint-plugin": "~2.9.0",
+    "@typescript-eslint/eslint-plugin": "~8.38.0",
+    "@typescript-eslint/parser": "~8.38.0",
+    "angular-eslint": "~20.1.1",
+    "eslint": "^9.31.0",
+    "eslint-plugin-angular-file-naming": "~1.0.6",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-rxjs-angular": "^2.0.1",
+    "eslint-plugin-sonarjs": "~3.0.4",
+    "eslint-plugin-unicorn": "^56.0.0",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "~8.38.0"
+  },
+  "peerDependencies": {
+    "jest": "*"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
