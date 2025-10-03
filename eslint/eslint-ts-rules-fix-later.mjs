@@ -12,8 +12,6 @@ export const fixLaterRules = {
   "no-prototype-builtins": ["off"],
   "@smarttools/rxjs/no-nested-subscribe": ["off"],
 
-  "sonarjs/prefer-nullish-coalescing": ["off"],
-  "sonarjs/deprecation": ["off"],
   "sonarjs/no-selector-parameter": ["off"],
   "sonarjs/concise-regex": ["off"],
   "sonarjs/regex-complexity": ["off"],
