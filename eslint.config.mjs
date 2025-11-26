@@ -3,7 +3,6 @@ import tsEslint from "typescript-eslint";
 import angular from "angular-eslint";
 import stylistic from "@stylistic/eslint-plugin";
 import { fixupPluginRules } from "@eslint/compat";
-import rxjsAngular from "eslint-plugin-rxjs-angular";
 import angularFileNaming from "eslint-plugin-angular-file-naming";
 import importPlugin from "eslint-plugin-import";
 import unusedImports from "eslint-plugin-unused-imports";
@@ -42,7 +41,6 @@ export default tsEslint.config(
     plugins: {
       unicorn,
       rxjs,
-      "rxjs-angular": fixupPluginRules(rxjsAngular),
       "angular-file-naming": fixupPluginRules(angularFileNaming),
       "unused-imports": unusedImports,
       "@stylistic/js": stylistic,

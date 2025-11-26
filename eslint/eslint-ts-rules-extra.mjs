@@ -9,12 +9,6 @@ export const extraRules = {
   "@smarttools/rxjs/no-unsafe-takeuntil": ["error", {
     "alias": ["untilDestroyed"]
   }],
-  "rxjs-angular/prefer-takeuntil": ["error", {
-    "alias": ["untilDestroyed"],
-    "checkComplete": false,
-    "checkDecorators": ["Component"],
-    "checkDestroy": false
-  }],
   "@smarttools/rxjs/finnish": ["error", {
     "parameters": true,
     "properties": false, // TODO: Should be true, hard to implement now.
