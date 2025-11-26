@@ -4,6 +4,7 @@ export const fixLaterRules = {
   "@typescript-eslint/no-floating-promises": ["off"],
   "@typescript-eslint/no-invalid-void-type": ["off"],
   "@typescript-eslint/no-base-to-string": ["off"],
+  "@typescript-eslint/no-unnecessary-type-conversion": ["off"],
   "@typescript-eslint/prefer-regexp-exec": ["off"],
   "@typescript-eslint/no-dynamic-delete": ["off"],
   "@typescript-eslint/class-literal-property-style": ["off"],

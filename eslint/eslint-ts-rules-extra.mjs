@@ -59,7 +59,7 @@ export const extraRules = {
   }],
   "@stylistic/js/computed-property-spacing": ["error", "never"],
   "@stylistic/js/function-call-argument-newline": ["error", "consistent"],
-  "@stylistic/ts/func-call-spacing": ["error", "never"],
+  "@stylistic/function-call-spacing": ["error", "never"],
   "@stylistic/js/function-paren-newline": ["error", "multiline-arguments"],
   "@stylistic/js/implicit-arrow-linebreak": ["error", "beside"],
   "@stylistic/ts/padding-line-between-statements": ["error"],
