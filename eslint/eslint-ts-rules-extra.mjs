@@ -390,4 +390,7 @@ export const extraRules = {
   "unicorn/filename-case": ["error", {case: "kebabCase"}],
   "unicorn/prefer-array-find": ["error"],
   "unicorn/no-useless-spread": ["error"],
+
+  // TrueNAS custom rules
+  "truenas/no-extra-whitespace-in-line-continuation": "error",
 };

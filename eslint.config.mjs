@@ -14,6 +14,7 @@ import { fixLaterRules } from "./eslint/eslint-ts-rules-fix-later.mjs";
 import { ruleOverrides } from "./eslint/eslint-ts-rules-overrides.mjs";
 import { extraRules } from "./eslint/eslint-ts-rules-extra.mjs";
 import rxjs from "@smarttools/eslint-plugin-rxjs";
+import noExtraWhitespaceInLineContinuation from "./eslint/rules/no-extra-whitespace-in-line-continuation.mjs";
 
 export default tsEslint.config(
   {
@@ -43,6 +44,11 @@ export default tsEslint.config(
       rxjs,
       "angular-file-naming": fixupPluginRules(angularFileNaming),
       "unused-imports": unusedImports,
+      "truenas": {
+        rules: {
+          "no-extra-whitespace-in-line-continuation": noExtraWhitespaceInLineContinuation,
+        },
+      },
       "@stylistic/js": stylistic,
       "@stylistic/ts": stylistic,
     },
