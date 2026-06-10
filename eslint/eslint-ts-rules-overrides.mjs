@@ -49,6 +49,7 @@ export const ruleOverrides = {
   "sonarjs/aws-sqs-unencrypted-queue": ["off"],
   "sonarjs/new-cap": ["off"],
   "sonarjs/no-clear-text-protocols": ["off"],
+  "sonarjs/no-commented-code": ["off"], // takes 60%+ of eslint run time, not worth it
   "sonarjs/no-deprecated-react": ["off"],
   "sonarjs/no-duplicate-string": ["off"],
   "sonarjs/no-hardcoded-credentials": ["off"],
