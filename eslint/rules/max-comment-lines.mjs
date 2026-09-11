@@ -3,6 +3,8 @@
  *
  * Caps the number of lines a single comment block may span. A block is one `/* ... *\/` or
  * JSDoc comment, or a run of `//` comments on consecutive lines with nothing else on them.
+ * Directive comments (eslint-*, @ts-*, triple-slash references, istanbul/prettier pragmas)
+ * are never counted and always end a run, so `eslint-disable-next-line` works on a run.
  *
  * Long comments usually restate the code, narrate history, or hold documentation that
  * belongs in a docs folder. Comment the why, keep it short.
@@ -18,6 +20,8 @@
  */
 
 const DEFAULT_MAX = 10;
+
+const DIRECTIVE_PATTERN = /^\s*(?:eslint|globals?\s|exported\s|istanbul\s|c8\s|v8\s|prettier-ignore|@ts-(?:check|nocheck|ignore|expect-error)|\/\s*<)/u;
 
 const rule = {
   meta: {
@@ -39,6 +43,10 @@ const rule = {
   create(context) {
     const max = context.options[0] ?? DEFAULT_MAX;
     const sourceCode = context.sourceCode ?? context.getSourceCode();
+
+    function isDirective(comment) {
+      return DIRECTIVE_PATTERN.test(comment.value);
+    }
 
     function isOnOwnLine(comment) {
       const line = sourceCode.lines[comment.loc.start.line - 1];
@@ -71,6 +79,11 @@ const rule = {
         };
 
         for (const comment of sourceCode.getAllComments()) {
+          if (isDirective(comment)) {
+            flushRun();
+            continue;
+          }
+
           const continuesRun = comment.type === 'Line'
             && isOnOwnLine(comment)
             && runEnd

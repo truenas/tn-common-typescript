@@ -61,6 +61,31 @@ ruleTester.run('max-comment-lines', rule, {
     {
       code: 'const a = 1;',
     },
+    // eslint-disable-next-line for this rule suppresses the run beneath it
+    {
+      code: `// eslint-disable-next-line rule-to-test/max-comment-lines\n${lineRun(11)}\nconst a = 1;`,
+    },
+    // A directive for another rule above a run at the limit does not extend it
+    {
+      code: `// eslint-disable-next-line no-console\n${lineRun(10)}\nconsole.log(1);`,
+    },
+    // A pragma below a run at the limit does not extend it
+    {
+      code: `${lineRun(10)}\n// @ts-expect-error\nconst a = 1;`,
+    },
+    // A directive in the middle of a run splits it
+    {
+      code: `${lineRun(6)}\n// eslint-disable-next-line no-console\n${lineRun(6)}\nconsole.log(1);`,
+    },
+    // Triple-slash references are not a comment run
+    {
+      code: Array.from({ length: 12 }, (_, i) => `/// <reference path="./a${i}.d.ts" />`).join('\n'),
+    },
+    // Block-form directives are never reported
+    {
+      code: '/* eslint-disable no-console */\nconsole.log(1);\n/* eslint-enable no-console */',
+      options: [1],
+    },
   ],
   invalid: [
     // Run of line comments over the default limit
@@ -93,6 +118,11 @@ ruleTester.run('max-comment-lines', rule, {
     {
       code: `function a() {\n${lineRun(11).replace(/^/gm, '  ')}\n  return 1;\n}`,
       errors: [{ messageId: 'tooLong', data: { actual: '11', max: '10' } }],
+    },
+    // A directive above a run does not shift where the run is reported
+    {
+      code: `// eslint-disable-next-line no-console\n${lineRun(11)}\nconsole.log(1);`,
+      errors: [{ messageId: 'tooLong', data: { actual: '11', max: '10' }, line: 2, endLine: 12 }],
     },
   ],
 });
