@@ -13,6 +13,10 @@ const ruleTester = new RuleTester({
 const lineRun = (count) => Array.from({ length: count }, (_, i) => `// line ${i + 1}`).join('\n');
 const blockComment = (count) => `/*\n${Array.from({ length: count - 2 }, (_, i) => ` * line ${i + 1}`).join('\n')}\n */`;
 const jsdocComment = (count) => `/**\n${Array.from({ length: count - 2 }, (_, i) => ` * line ${i + 1}`).join('\n')}\n */`;
+// 14 lines spanned, 8 with text: opener, closer and 4 separator lines are blank.
+const spacedJsdoc = `/**\n${Array.from({ length: 8 }, (_, i) => (i % 2 ? ` * line ${i + 1}\n *` : ` * line ${i + 1}`)).join('\n')}\n */`;
+// 12 lines spanned, 9 with text.
+const spacedLineRun = `${lineRun(3)}\n//\n${lineRun(3)}\n//\n${lineRun(3)}\n//`;
 
 ruleTester.run('max-comment-lines', rule, {
   valid: [
@@ -86,6 +90,26 @@ ruleTester.run('max-comment-lines', rule, {
       code: '/* eslint-disable no-console */\nconsole.log(1);\n/* eslint-enable no-console */',
       options: [1],
     },
+    // Object form: max
+    {
+      code: `${lineRun(20)}\nconst a = 1;`,
+      options: [{ max: 20 }],
+    },
+    // Object form: skipBlankLines ignores blank JSDoc lines, opener and closer
+    {
+      code: `${spacedJsdoc}\nfunction a() {}`,
+      options: [{ skipBlankLines: true }],
+    },
+    // Object form: skipBlankLines ignores empty // lines
+    {
+      code: `${spacedLineRun}\nconst a = 1;`,
+      options: [{ skipBlankLines: true }],
+    },
+    // Object form: ignoreJsDoc skips /** */ comments
+    {
+      code: `${jsdocComment(15)}\nfunction a() {}`,
+      options: [{ ignoreJsDoc: true }],
+    },
   ],
   invalid: [
     // Run of line comments over the default limit
@@ -123,6 +147,30 @@ ruleTester.run('max-comment-lines', rule, {
     {
       code: `// eslint-disable-next-line no-console\n${lineRun(11)}\nconsole.log(1);`,
       errors: [{ messageId: 'tooLong', data: { actual: '11', max: '10' }, line: 2, endLine: 12 }],
+    },
+    // Object form: max lowers the threshold
+    {
+      code: `${lineRun(4)}\nconst a = 1;`,
+      options: [{ max: 3 }],
+      errors: [{ messageId: 'tooLong', data: { actual: '4', max: '3' } }],
+    },
+    // Without skipBlankLines, blank lines count
+    {
+      code: `${spacedJsdoc}\nfunction a() {}`,
+      options: [{ max: 10 }],
+      errors: [{ messageId: 'tooLong', data: { actual: '14', max: '10' } }],
+    },
+    // skipBlankLines reports the counted lines, not the span
+    {
+      code: `${spacedLineRun}\nconst a = 1;`,
+      options: [{ max: 8, skipBlankLines: true }],
+      errors: [{ messageId: 'tooLong', data: { actual: '9', max: '8' } }],
+    },
+    // ignoreJsDoc does not ignore plain block comments
+    {
+      code: `${blockComment(15)}\nconst a = 1;`,
+      options: [{ ignoreJsDoc: true }],
+      errors: [{ messageId: 'tooLong', data: { actual: '15', max: '10' } }],
     },
   ],
 });
