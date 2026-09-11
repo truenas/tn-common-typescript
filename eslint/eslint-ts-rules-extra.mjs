@@ -393,4 +393,5 @@ export const extraRules = {
 
   // TrueNAS custom rules
   "truenas/no-extra-whitespace-in-line-continuation": "error",
+  "truenas/max-comment-lines": ["warn", 20],
 };
