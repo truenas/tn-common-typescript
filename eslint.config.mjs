@@ -15,6 +15,7 @@ import { ruleOverrides } from "./eslint/eslint-ts-rules-overrides.mjs";
 import { extraRules } from "./eslint/eslint-ts-rules-extra.mjs";
 import rxjs from "@smarttools/eslint-plugin-rxjs";
 import noExtraWhitespaceInLineContinuation from "./eslint/rules/no-extra-whitespace-in-line-continuation.mjs";
+import maxCommentLines from "./eslint/rules/max-comment-lines.mjs";
 
 export default tsEslint.config(
   {
@@ -47,6 +48,7 @@ export default tsEslint.config(
       "truenas": {
         rules: {
           "no-extra-whitespace-in-line-continuation": noExtraWhitespaceInLineContinuation,
+          "max-comment-lines": maxCommentLines,
         },
       },
       "@stylistic/js": stylistic,
