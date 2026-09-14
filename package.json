@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "node scripts/lint.ts",
+    "test": "node --test eslint/rules/*.spec.mjs",
     "test:changed": "node scripts/test_changed.js"
   },
   "exports": {
