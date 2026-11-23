@@ -1,0 +1,20 @@
+{
+  "name": "@truenas/eslint-rules",
+  "version": "1.0.0",
+  "description": "Custom ESLint rules for TrueNAS projects, with no dependencies",
+  "type": "module",
+  "main": "./index.mjs",
+  "exports": {
+    ".": "./index.mjs",
+    "./max-comment-lines": "./max-comment-lines.mjs",
+    "./no-extra-whitespace-in-line-continuation": "./no-extra-whitespace-in-line-continuation.mjs"
+  },
+  "files": [
+    "*.mjs",
+    "!*.spec.mjs"
+  ],
+  "peerDependencies": {
+    "eslint": ">=9"
+  },
+  "license": "MIT"
+}

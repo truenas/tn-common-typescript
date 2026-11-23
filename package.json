@@ -4,6 +4,9 @@
   "description": "Shared TypeScript utilities, scripts and ESLint configurations for TrueNAS projects",
   "type": "module",
   "main": "index.js",
+  "workspaces": [
+    "eslint/rules"
+  ],
   "scripts": {
     "lint": "node scripts/lint.ts",
     "test": "node --test eslint/rules/*.spec.mjs",
