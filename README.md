@@ -23,6 +23,29 @@ export default [
 ];
 ```
 
+### Custom rules only
+
+`eslint/rules` is also a separate package, `@truenas/eslint-rules`, with no dependencies. Use it
+to get the custom rules without installing the full config and its plugins. Yarn 2+ can install
+it straight from this repository:
+
+```bash
+yarn add -D "@truenas/eslint-rules@github:truenas/tn-common-typescript#workspace=@truenas/eslint-rules&commit=<sha>"
+```
+
+```javascript
+import truenas from '@truenas/eslint-rules';
+
+export default [
+  {
+    plugins: { truenas },
+    rules: { 'truenas/max-comment-lines': ['error', 20] },
+  },
+];
+```
+
+Single rules are exported too, e.g. `@truenas/eslint-rules/max-comment-lines`.
+
 ### Scripts
 
 #### Linting
@@ -50,3 +73,4 @@ npx @truenas/common-typescript/scripts/test_changed
   - `eslint-ts-rules-extra.mjs` - Additional TypeScript rules
   - `eslint-ts-rules-fix-later.mjs` - Rules to be fixed later
   - `eslint-ts-rules-overrides.mjs` - Rule overrides
+  - `rules/` - Custom rules, also the dependency-free `@truenas/eslint-rules` workspace package
